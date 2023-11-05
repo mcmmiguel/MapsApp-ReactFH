@@ -1,6 +1,7 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { PlacesContext } from "./PlacesContext";
 import { placesReducer } from './placesReducer';
+import { getUserLocation } from '../../helpers';
 
 export interface PlacesState {
     isLoading: boolean;
@@ -20,6 +21,11 @@ export const PlacesProvider = ({ children }: PlacesProviderProps) => {
 
     const [state, dispatch] = useReducer(placesReducer, INITIAL_STATE);
 
+    useEffect(() => {
+        getUserLocation()
+            .then(longLat => dispatch({ type: 'setUserLocation', payload: longLat }))
+    }, []);
+
     return (
         <PlacesContext.Provider value={{
             ...state,
@@ -27,8 +33,4 @@ export const PlacesProvider = ({ children }: PlacesProviderProps) => {
             {children}
         </PlacesContext.Provider>
     )
-}
-
-function useReduce(first: any, second: any, third: any): [any, any] {
-    throw new Error("Function not implemented.");
 }
