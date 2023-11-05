@@ -1,4 +1,6 @@
+import { useReducer } from 'react';
 import { PlacesContext } from "./PlacesContext";
+import { placesReducer } from './placesReducer';
 
 export interface PlacesState {
     isLoading: boolean;
@@ -15,12 +17,18 @@ const INITIAL_STATE: PlacesState = {
 }
 
 export const PlacesProvider = ({ children }: PlacesProviderProps) => {
+
+    const [state, dispatch] = useReducer(placesReducer, INITIAL_STATE);
+
     return (
         <PlacesContext.Provider value={{
-            isLoading: true,
-            userLocation: undefined,
+            ...state,
         }}>
             {children}
         </PlacesContext.Provider>
     )
+}
+
+function useReduce(first: any, second: any, third: any): [any, any] {
+    throw new Error("Function not implemented.");
 }
