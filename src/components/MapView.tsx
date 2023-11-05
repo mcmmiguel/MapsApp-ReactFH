@@ -2,6 +2,7 @@ import { useContext, useRef, useLayoutEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { MapContext, PlacesContext } from '../context';
 import { Loading } from './Loading';
+import { BtnMyLocation } from './BtnMyLocation';
 
 export const MapView = () => {
 
@@ -13,7 +14,7 @@ export const MapView = () => {
         if (!isLoading) {
             const map = new mapboxgl.Map({
                 container: mapDiv.current!,
-                style: 'mapbox://styles/mapbox/streets-v11',
+                style: 'mapbox://styles/mapbox/light-v10',
                 center: userLocation,
                 zoom: 15,
             });
@@ -35,6 +36,7 @@ export const MapView = () => {
                 width: '100vw',
             }}
         >
+            <BtnMyLocation />
 
             {userLocation?.join(',')}
 
