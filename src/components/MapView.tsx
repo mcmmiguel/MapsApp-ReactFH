@@ -1,11 +1,12 @@
 import { useContext, useRef, useLayoutEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { PlacesContext } from '../context';
+import { MapContext, PlacesContext } from '../context';
 import { Loading } from './Loading';
 
 export const MapView = () => {
 
     const { isLoading, userLocation } = useContext(PlacesContext);
+    const { setMap } = useContext(MapContext);
     const mapDiv = useRef<HTMLDivElement>(null);
 
     useLayoutEffect(() => {
@@ -16,6 +17,7 @@ export const MapView = () => {
                 center: userLocation,
                 zoom: 15,
             });
+            setMap(map);
         }
     }, [isLoading])
 
