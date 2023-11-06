@@ -47,7 +47,11 @@ export const MapProvider = ({ children }: MapProviderProps) => {
 
         dispatch({ type: 'setMarkers', payload: newMarkers })
 
-    }, [places])
+    }, [places]);
+
+    const getRouteBetweenPoints = async (start: [number, number], end: [number, number]) => {
+
+    }
 
     const setMap = (map: Map) => {
 
