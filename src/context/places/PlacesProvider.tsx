@@ -34,7 +34,10 @@ export const PlacesProvider = ({ children }: PlacesProviderProps) => {
 
     const searchPlacesByQuery = async (query: string) => {
 
-        if (query.length === 0) return [];
+        if (query.length === 0) {
+            dispatch({ type: 'setPlaces', payload: [] })
+            return [];
+        };
 
         if (!state.userLocation) throw new Error('Ubicación del usuario no disponible');
 
